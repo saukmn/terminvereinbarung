@@ -23,7 +23,7 @@ function main {
   do
     echo "#$((++num_of_tries)) try at `date`"
 
-    [[ "`curl ${DATUM_URL}`" =~ ${PATTERN} ]] && act $@
+    [[ "`curl ${DATUM_URL}`"=~${PATTERN} ]] && act $@
 
     sleep ${DELAY}
   done
