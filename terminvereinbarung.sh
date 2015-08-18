@@ -23,7 +23,8 @@ function main {
   do
     echo "#$((++num_of_tries)) try at `date`"
 
-    [[ "`curl ${DATUM_URL}`"=~${PATTERN} ]] && act $@
+    date_exists=`curl ${DATUM_URL} | grep -c ${PATTERN}`
+    [[ $date_exists -gt 0 ]] && act $@
 
     sleep ${DELAY}
   done
@@ -34,7 +35,7 @@ function act {
     case "$1" in
       -u | --uhrzeit) 					
         # navigate to
-        echo Navigaiting to earliest available appointment times
+        echo Navigating to earliest available appointment times
         open_urhzeit_url
         ;;
       -b | --buchung)
